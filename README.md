@@ -25,6 +25,32 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Библиотека
+
+В этом проекте реализован модуль управления книгами с полным CRUD функционалом:
+
+### Особенности
+
+- **REST API** для операций с книгами:
+  - `GET /books` - Получить список всех книг
+  - `GET /books/:id` - Получить конкретную книгу по ID
+  - `POST /books` - Создать новую книгу
+  - `PUT /books/:id` - Обновить существующую книгу
+  - `DELETE /books/:id` - Удалить книгу
+
+### Хранение данных
+
+- Начальные данные хранятся в `src/services/books/data.json`
+- При создании новых книг автоматически генерируются ID в формате `b-001`, `b-002`, etc.
+- Структура книги включает: id, title, description, authors, favorite, fileCover, fileName, fileBook
+
+### Техническая реализация
+
+- **BooksService** - Сервисный слой с бизнес-логикой
+- **BooksController** - REST контроллер с эндпоинтами
+- **BooksModule** - Модуль NestJS, импортированный в основной AppModule
+- TypeScript типизация через интерфейс IBook
+
 ## Project setup
 
 ```bash
