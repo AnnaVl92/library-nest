@@ -5,8 +5,8 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
+   <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+     <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
@@ -14,47 +14,57 @@
 <a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
 <a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
 <a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+    <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
+      <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+    <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+  </p>
+    <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Библиотека
+## Library
 
-В этом проекте реализован модуль управления книгами с полным CRUD функционалом:
+In this project, a book management module with full CRUD functionality has been implemented:
 
-### Особенности
+### Features
 
-- **REST API** для операций с книгами:
-  - `GET /books` - Получить список всех книг
-  - `GET /books/:id` - Получить конкретную книгу по ID
-  - `POST /books` - Создать новую книгу
-  - `PUT /books/:id` - Обновить существующую книгу
-  - `DELETE /books/:id` - Удалить книгу
+- **REST API** for book operations:
+  - `GET /books` - Get list of all books
+  - `GET /books/:id` - Get specific book by ID
+  - `POST /books` - Create a new book
+  - `PUT /books/:id` - Update existing book
+  - `DELETE /books/:id` - Delete book
 
-### Хранение данных
+### Data Storage
 
-- Начальные данные хранятся в `src/services/books/data.json`
-- При создании новых книг автоматически генерируются ID в формате `b-001`, `b-002`, etc.
-- Структура книги включает: id, title, description, authors, favorite, fileCover, fileName, fileBook
+- Data is stored in MongoDB using Mongoose ODM
+- When creating new books, IDs are automatically generated in ObjectId format
+- Book structure includes: title, description, authors, favorite, fileCover, fileName, fileBook
 
-### Техническая реализация
+### Technical Implementation
 
-- **BooksService** - Сервисный слой с бизнес-логикой
-- **BooksController** - REST контроллер с эндпоинтами
-- **BooksModule** - Модуль NestJS, импортированный в основной AppModule
-- TypeScript типизация через интерфейс IBook
+- **BooksService** - Service layer with business logic
+- **BooksController** - REST controller with endpoints
+- **BooksModule** - NestJS module imported into main AppModule
+- TypeScript typification through Mongoose schema
 
 ## Project setup
 
 ```bash
 $ npm install
+```
+
+## Environment Setup
+
+Create a `.env` file in the root directory with the following variables:
+
+```bash
+PORT=3050
+MONGO_DB_URL="mongodb://localhost:27017/library"
+SESSION_SECRET=your-super-secret-key-here-change-in-production
 ```
 
 ## Compile and run the project
