@@ -6,11 +6,14 @@ import {
   Param,
   Put,
   Delete,
+  UseInterceptors,
 } from '@nestjs/common';
 import { BooksService } from './books.service';
 import type IBook from './types';
 import { BookDocument } from './schemas';
+import { BooksInterceptor } from './books.interceptor';
 
+@UseInterceptors(BooksInterceptor)
 @Controller('books')
 export class BooksController {
   constructor(private readonly booksService: BooksService) {}
