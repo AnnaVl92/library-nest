@@ -25,7 +25,10 @@ export class BooksService {
     return this.bookModel.find().exec();
   }
 
-  async updateBook(id: string, updatedBook: IBook): Promise<BookDocument> {
+  async updateBook(
+    id: string,
+    updatedBook: Partial<IBook>,
+  ): Promise<BookDocument> {
     const book = await this.bookModel
       .findByIdAndUpdate(id, updatedBook, { new: true })
       .exec();

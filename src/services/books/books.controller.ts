@@ -10,10 +10,14 @@ import {
   UsePipes,
 } from '@nestjs/common';
 import { BooksService } from './books.service';
-import type IBook from './types';
 import { BookDocument } from './schemas';
 import { BooksInterceptor } from './books.interceptor';
-import { ValidationPipe } from './books.validation.pipe';
+import {
+  BookIdValidationPipe,
+  CreateBookValidationPipe,
+  UpdateBookValidationPipe,
+} from './validation';
+import { CreateBookDto, UpdateBookDto } from './dto';
 
 @UseInterceptors(BooksInterceptor)
 @Controller('books')
@@ -26,29 +30,31 @@ export class BooksController {
   }
 
   @Get(':id')
-  @UsePipes(ValidationPipe)
-  getBook(@Param('id') id: string): Promise<BookDocument> {
+  getBook(
+    @Param('id', BookIdValidationPipe) id: string,
+  ): Promise<BookDocument> {
     return this.booksService.getBook(id);
   }
 
   @Post()
-  @UsePipes(ValidationPipe)
-  createBook(@Body() book: Partial<IBook>): Promise<BookDocument> {
+  @UsePipes(CreateBookValidationPipe)
+  createBook(@Body() book: CreateBookDto): Promise<BookDocument> {
     return this.booksService.createBook(book);
   }
 
   @Put(':id')
-  @UsePipes(ValidationPipe)
+  @UsePipes(UpdateBookValidationPipe)
   updateBook(
-    @Param('id') id: string,
-    @Body() updatedBook: IBook,
+    @Param('id', BookIdValidationPipe) id: string,
+    @Body() updatedBook: UpdateBookDto,
   ): Promise<BookDocument> {
     return this.booksService.updateBook(id, updatedBook);
   }
 
   @Delete(':id')
-  @UsePipes(ValidationPipe)
-  deleteBook(@Param('id') id: string): Promise<BookDocument> {
+  deleteBook(
+    @Param('id', BookIdValidationPipe) id: string,
+  ): Promise<BookDocument> {
     return this.booksService.deleteBook(id);
   }
 }
