@@ -8,6 +8,7 @@ import {
   Delete,
   UseInterceptors,
   UsePipes,
+  UseFilters,
 } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { BookDocument } from './schemas';
@@ -18,8 +19,10 @@ import {
   UpdateBookValidationPipe,
 } from './validation';
 import { CreateBookDto, UpdateBookDto } from './dto';
+import { HttpExceptionFilter } from './http-exception.filter';
 
 @UseInterceptors(BooksInterceptor)
+@UseFilters(HttpExceptionFilter)
 @Controller('books')
 export class BooksController {
   constructor(private readonly booksService: BooksService) {}
