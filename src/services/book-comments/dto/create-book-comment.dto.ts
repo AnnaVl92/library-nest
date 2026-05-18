@@ -1,5 +1,9 @@
 export class CreateBookCommentDto {
   bookId: string;
 
-  comment: string;
+  username: string;
+
+  text: string;
+
+  mentions?: string[];
 }

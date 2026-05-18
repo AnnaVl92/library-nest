@@ -1,3 +1,7 @@
 export class UpdateBookCommentDto {
-  comment: string;
+  username?: string;
+
+  text?: string;
+
+  mentions?: string[];
 }

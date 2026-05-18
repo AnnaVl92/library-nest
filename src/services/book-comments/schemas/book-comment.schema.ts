@@ -15,7 +15,13 @@ export class BookComment {
   bookId: Types.ObjectId;
 
   @Prop({ required: true })
-  comment: string;
+  username: string;
+
+  @Prop({ required: true })
+  text: string;
+
+  @Prop({ type: [String], default: [] })
+  mentions: string[];
 }
 
 export const BookCommentSchema = SchemaFactory.createForClass(BookComment);

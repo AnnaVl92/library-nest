@@ -16,7 +16,9 @@ export class BookCommentsService {
   ): Promise<BookCommentDocument> {
     const doc = new this.bookCommentModel({
       bookId: data.bookId,
-      comment: data.comment,
+      username: data.username,
+      text: data.text,
+      mentions: data.mentions ?? [],
     });
     return doc.save();
   }
@@ -38,7 +40,7 @@ export class BookCommentsService {
     data: UpdateBookCommentDto,
   ): Promise<BookCommentDocument> {
     const comment = await this.bookCommentModel
-      .findByIdAndUpdate(id, { comment: data.comment }, { new: true })
+      .findByIdAndUpdate(id, data, { new: true })
       .exec();
     if (!comment) {
       throw new Error(`Комментарий с id ${id} не найден`);

@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { BookComment, BookCommentSchema } from './schemas';
 import { BookCommentsService } from './book-comments.service';
+import { BookCommentsGateway } from './book-comments.gateway';
 
 @Module({
   imports: [
@@ -9,7 +10,7 @@ import { BookCommentsService } from './book-comments.service';
       { name: BookComment.name, schema: BookCommentSchema },
     ]),
   ],
-  providers: [BookCommentsService],
-  exports: [BookCommentsService],
+  providers: [BookCommentsService, BookCommentsGateway],
+  exports: [BookCommentsService, BookCommentsGateway],
 })
 export class BookCommentsModule {}
