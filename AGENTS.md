@@ -35,14 +35,18 @@
 
 ## Project Structure
 
-- NestJS MongoDB/Mongoose book management API
-- REST endpoints: `GET/POST/PUT/DELETE /books` and `/books/:id`
+- NestJS MongoDB/Mongoose book management API with EJS web UI
+- REST endpoints: `GET/POST/PUT/DELETE /api/books` and `/api/books/:id`
+- Auth API: `POST /api/users/signin`, `POST /api/users/signup`
+- HTML pages (EJS in `views/`): `/auth/signin`, `/auth/signup`, `/books`, `/books/:id`
+- `GET /` redirects to `/books` (authenticated) or `/auth/signin` (guest)
 - Source code in `src/` directory
 - Tests in `test/` directory
 - Configuration via environment variables
 
 ## Key Details
 
+- JWT auth via `Authorization: Bearer` header or `access_token` httpOnly cookie
 - Uses NestJS framework with Mongoose ODM
 - Book schema: title, description, authors, favorite, fileCover, fileName, fileBook
 - Automatic ObjectId generation for new books

@@ -1,0 +1,74 @@
+<%- include('../layouts/main', { partial: 'start', title: book.title, user }) %>
+
+<p><a href="/books">← Back to list</a></p>
+
+<div class="card">
+  <h1><%= book.title %></h1>
+
+  <div class="detail-row">
+    <div class="detail-label">Authors</div>
+    <div><%= book.authors %></div>
+  </div>
+
+  <% if (book.description) { %>
+    <div class="detail-row">
+      <div class="detail-label">Description</div>
+      <div><%= book.description %></div>
+    </div>
+  <% } %>
+
+  <% if (book.favorite) { %>
+    <div class="detail-row">
+      <span class="favorite-badge">Favorite</span>
+    </div>
+  <% } %>
+
+  <% if (book.fileName) { %>
+    <div class="detail-row">
+      <div class="detail-label">File</div>
+      <div><%= book.fileName %></div>
+    </div>
+  <% } %>
+
+  <% if (book.fileBook) { %>
+    <div class="detail-row">
+      <div class="detail-label">Book file</div>
+      <div><%= book.fileBook %></div>
+    </div>
+  <% } %>
+
+  <% if (book.fileCover) { %>
+    <div class="detail-row">
+      <div class="detail-label">Cover</div>
+      <div><%= book.fileCover %></div>
+    </div>
+  <% } %>
+</div>
+
+<section class="comments">
+  <h2>Comments</h2>
+  <% if (comments && comments.length > 0) { %>
+    <ul class="comments-list">
+      <% comments.forEach(function (comment) { %>
+        <li>
+          <strong><%= comment.username %></strong>: <%= comment.text %>
+          <div class="comment-meta">
+            <%= new Date(comment.createdAt).toLocaleString('en-US') %>
+          </div>
+        </li>
+      <% }); %>
+    </ul>
+  <% } else { %>
+    <p class="book-meta">No comments yet.</p>
+  <% } %>
+
+  <form method="POST" action="/books/<%= book.id %>/comments">
+    <div class="form-group">
+      <label for="text">Add a comment</label>
+      <textarea id="text" name="text" required placeholder="Your comment…"></textarea>
+    </div>
+    <button type="submit" class="btn">Submit</button>
+  </form>
+</section>
+
+<%- include('../layouts/main', { partial: 'end' }) %>

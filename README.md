@@ -32,11 +32,20 @@ In this project, a book management module with full CRUD functionality has been 
 ### Features
 
 - **REST API** for book operations:
-  - `GET /books` - Get list of all books
-  - `GET /books/:id` - Get specific book by ID
-  - `POST /books` - Create a new book
-  - `PUT /books/:id` - Update existing book
-  - `DELETE /books/:id` - Delete book
+  - `GET /api/books` - Get list of all books
+  - `GET /api/books/:id` - Get specific book by ID
+  - `POST /api/books` - Create a new book
+  - `PUT /api/books/:id` - Update existing book
+  - `DELETE /api/books/:id` - Delete book
+
+- **Web UI** (EJS templates, JWT via cookie):
+  - `GET /` - Redirect to `/books` (authenticated) or `/auth/signin` (guest)
+  - `GET /auth/signin`, `POST /auth/signin` - Sign in
+  - `GET /auth/signup`, `POST /auth/signup` - Sign up
+  - `POST /auth/logout` - Sign out
+  - `GET /books` - Book list with comments
+  - `GET /books/:id` - Book details
+  - `POST /books/:id/comments` - Add a comment
 
 ### Data Storage
 

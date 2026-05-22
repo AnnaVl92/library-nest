@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Book, BookDocument } from './schemas';
 import IBook from './types';
@@ -44,5 +44,23 @@ export class BooksService {
       throw new Error(`Book with id ${id} not found`);
     }
     return book;
+  }
+
+  async incrementCommentsCount(bookId: string): Promise<void> {
+    await this.bookModel
+      .updateOne(
+        { _id: new Types.ObjectId(bookId) },
+        { $inc: { commentsCount: 1 } },
+      )
+      .exec();
+  }
+
+  async decrementCommentsCount(bookId: string): Promise<void> {
+    await this.bookModel
+      .updateOne(
+        { _id: new Types.ObjectId(bookId), commentsCount: { $gt: 0 } },
+        { $inc: { commentsCount: -1 } },
+      )
+      .exec();
   }
 }

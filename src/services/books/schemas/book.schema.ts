@@ -25,6 +25,9 @@ export class Book {
 
   @Prop()
   fileBook?: string;
+
+  @Prop({ default: 0, min: 0 })
+  commentsCount: number;
 }
 
 export const BookSchema = SchemaFactory.createForClass(Book);

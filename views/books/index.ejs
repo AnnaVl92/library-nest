@@ -1,0 +1,25 @@
+<%- include('../layouts/main', { partial: 'start', title: 'Books', user }) %>
+
+<h1>Books</h1>
+
+<% if (!books || books.length === 0) { %>
+  <div class="card">
+    <p>No books yet.</p>
+  </div>
+<% } else { %>
+  <% books.forEach(function (book) { %>
+    <article class="card">
+      <h2><%= book.title %></h2>
+      <p class="book-meta">Authors: <%= book.authors %></p>
+      <% if (book.description) { %>
+        <p class="book-meta"><%= book.description %></p>
+      <% } %>
+      <p class="book-meta">Comments: <%= book.commentsCount %></p>
+      <div class="book-actions">
+        <a href="/books/<%= book.id %>">View details</a>
+      </div>
+    </article>
+  <% }); %>
+<% } %>
+
+<%- include('../layouts/main', { partial: 'end' }) %>

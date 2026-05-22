@@ -1,14 +1,27 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
-import { Public } from './services';
+import { Controller, Get, Req, Res } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import type { Request, Response } from 'express';
+import { ACCESS_TOKEN_COOKIE, Public } from './services';
 
 @Public()
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly jwtService: JwtService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  root(@Req() req: Request, @Res() res: Response): void {
+    const token = req.cookies?.[ACCESS_TOKEN_COOKIE];
+
+    if (typeof token === 'string') {
+      try {
+        this.jwtService.verify(token);
+        res.redirect('/books');
+        return;
+      } catch {
+        // invalid or expired token
+      }
+    }
+
+    res.redirect('/auth/signin');
   }
 }

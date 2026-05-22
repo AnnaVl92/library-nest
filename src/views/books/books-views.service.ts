@@ -13,22 +13,18 @@ export class BooksViewsService {
     private readonly commentsService: BookCommentsService,
   ) {}
 
-  async getBooksWithComments() {
+  async getBooksForView() {
     const books = await this.booksService.getBooks();
 
-    return Promise.all(
-      books.map(async (book) => ({
-        ...prepareBookForView(book),
-        comments: (
-          await this.commentsService.findAllBookComment(book._id.toString())
-        ).map(toBookCommentResponse),
-      })),
-    );
+    return books.map(prepareBookForView);
   }
 
-  async getBookForView(id: string) {
-    const book = await this.booksService.getBook(id);
+  async getBookWithComments(id: string) {
+    const book = prepareBookForView(await this.booksService.getBook(id));
+    const comments = (
+      await this.commentsService.findAllBookComment(id)
+    ).map(toBookCommentResponse);
 
-    return prepareBookForView(book);
+    return { book, comments };
   }
 }

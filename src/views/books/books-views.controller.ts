@@ -26,7 +26,7 @@ export class BooksViewsController {
   @Get()
   @Render('books/index')
   async index(@Req() req: AuthenticatedRequest) {
-    const books = await this.booksViewsService.getBooksWithComments();
+    const books = await this.booksViewsService.getBooksForView();
 
     return {
       books,
@@ -41,10 +41,12 @@ export class BooksViewsController {
     @Res() res: Response,
   ): Promise<void> {
     try {
-      const book = await this.booksViewsService.getBookForView(id);
+      const { book, comments } =
+        await this.booksViewsService.getBookWithComments(id);
 
       res.render('books/show', {
         book,
+        comments,
         user: req.user,
       });
     } catch {
@@ -65,6 +67,6 @@ export class BooksViewsController {
       text,
     });
 
-    res.redirect('/books');
+    res.redirect(`/books/${id}`);
   }
 }

@@ -23,7 +23,7 @@ import { HttpExceptionFilter } from './http-exception.filter';
 
 @UseInterceptors(BooksInterceptor)
 @UseFilters(HttpExceptionFilter)
-@Controller('books')
+@Controller('api/books')
 export class BooksController {
   constructor(private readonly booksService: BooksService) {}
 

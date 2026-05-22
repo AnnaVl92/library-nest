@@ -9,6 +9,7 @@ export interface SerializedBook {
   fileCover?: string;
   fileName?: string;
   fileBook?: string;
+  commentsCount: number;
 }
 
 export function prepareBookForView(doc: BookDocument): SerializedBook {
@@ -21,5 +22,6 @@ export function prepareBookForView(doc: BookDocument): SerializedBook {
     fileCover: doc.fileCover,
     fileName: doc.fileName,
     fileBook: doc.fileBook,
+    commentsCount: doc.commentsCount ?? 0,
   };
 }
