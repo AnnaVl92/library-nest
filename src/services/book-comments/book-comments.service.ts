@@ -30,7 +30,7 @@ export class BookCommentsService {
   async getBookComment(id: string): Promise<BookCommentDocument> {
     const comment = await this.bookCommentModel.findById(id).exec();
     if (!comment) {
-      throw new Error(`Комментарий с id ${id} не найден`);
+      throw new Error(`Comment with id ${id} not found`);
     }
     return comment;
   }
@@ -43,7 +43,7 @@ export class BookCommentsService {
       .findByIdAndUpdate(id, data, { new: true })
       .exec();
     if (!comment) {
-      throw new Error(`Комментарий с id ${id} не найден`);
+      throw new Error(`Comment with id ${id} not found`);
     }
     return comment;
   }
@@ -51,7 +51,7 @@ export class BookCommentsService {
   async deleteBookComment(id: string): Promise<BookCommentDocument> {
     const comment = await this.bookCommentModel.findByIdAndDelete(id).exec();
     if (!comment) {
-      throw new Error(`Комментарий с id ${id} не найден`);
+      throw new Error(`Comment with id ${id} not found`);
     }
     return comment;
   }

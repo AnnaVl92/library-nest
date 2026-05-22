@@ -110,7 +110,7 @@ describe('BooksService', () => {
       });
 
       await expect(service.getBook('507f1f77bcf86cd799439011')).rejects.toThrow(
-        'Книга с id 507f1f77bcf86cd799439011 не найдена',
+        'Book with id 507f1f77bcf86cd799439011 not found',
       );
     });
   });
@@ -158,7 +158,7 @@ describe('BooksService', () => {
 
       await expect(
         service.updateBook('507f1f77bcf86cd799439011', { title: 'Updated' }),
-      ).rejects.toThrow('Книга с id 507f1f77bcf86cd799439011 не найдена');
+      ).rejects.toThrow('Book with id 507f1f77bcf86cd799439011 not found');
     });
   });
 
@@ -183,7 +183,7 @@ describe('BooksService', () => {
 
       await expect(
         service.deleteBook('507f1f77bcf86cd799439011'),
-      ).rejects.toThrow('Книга с id 507f1f77bcf86cd799439011 не найдена');
+      ).rejects.toThrow('Book with id 507f1f77bcf86cd799439011 not found');
     });
   });
 });

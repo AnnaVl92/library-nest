@@ -2,8 +2,13 @@ import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { BooksModule, AuthModule, BookCommentsModule } from './services';
-import { JwtAuthGuard } from './services';
+import {
+  BooksModule,
+  AuthModule,
+  BookCommentsModule,
+  JwtAuthGuard,
+} from './services';
+import { ViewsModule } from './views';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
@@ -14,6 +19,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRoot(process.env.MONGO_DB_URL as unknown as string),
     AuthModule,
+    ViewsModule,
   ],
   controllers: [AppController],
   providers: [

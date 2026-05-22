@@ -5,4 +5,7 @@ export * from './dto';
 export * from './decorators';
 export * from './guards';
 export * from './interfaces';
+export * from './constants';
+export * from './types';
+export * from './helpers';
 export type { JwtValidatedUser } from './strategies';

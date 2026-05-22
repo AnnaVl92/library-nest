@@ -22,5 +22,6 @@ import {
     UpdateBookValidationPipe,
     BookIdValidationPipe,
   ],
+  exports: [BooksService, BookIdValidationPipe],
 })
 export class BooksModule {}

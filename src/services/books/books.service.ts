@@ -16,7 +16,7 @@ export class BooksService {
   async getBook(id: string): Promise<BookDocument> {
     const book = await this.bookModel.findById(id).exec();
     if (!book) {
-      throw new Error(`Книга с id ${id} не найдена`);
+      throw new Error(`Book with id ${id} not found`);
     }
     return book;
   }
@@ -33,7 +33,7 @@ export class BooksService {
       .findByIdAndUpdate(id, updatedBook, { new: true })
       .exec();
     if (!book) {
-      throw new Error(`Книга с id ${id} не найдена`);
+      throw new Error(`Book with id ${id} not found`);
     }
     return book;
   }
@@ -41,7 +41,7 @@ export class BooksService {
   async deleteBook(id: string): Promise<BookDocument> {
     const book = await this.bookModel.findByIdAndDelete(id).exec();
     if (!book) {
-      throw new Error(`Книга с id ${id} не найдена`);
+      throw new Error(`Book with id ${id} not found`);
     }
     return book;
   }

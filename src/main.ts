@@ -4,6 +4,7 @@ import { AppModule } from './app.module';
 import { config } from 'dotenv';
 import { IoAdapter } from '@nestjs/platform-socket.io';
 import { join } from 'path';
+import { urlencoded } from 'express';
 import cookieParser from 'cookie-parser';
 
 async function bootstrap() {
@@ -12,6 +13,7 @@ async function bootstrap() {
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('ejs');
   app.use(cookieParser());
+  app.use(urlencoded({ extended: true }));
   app.useWebSocketAdapter(new IoAdapter(app));
   await app.listen(process.env.PORT ?? 3000);
 }

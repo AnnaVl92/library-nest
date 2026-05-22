@@ -4,6 +4,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import type { Request } from 'express';
 import type { JwtPayload } from '../interfaces';
+import { ACCESS_TOKEN_COOKIE } from '../constants';
 
 /** Payload attached to `request.user` after successful JWT validation. */
 export interface JwtValidatedUser {
@@ -19,8 +20,8 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
       jwtFromRequest: ExtractJwt.fromExtractors([
         ExtractJwt.fromAuthHeaderAsBearerToken(),
         (req: Request | undefined) =>
-          typeof req?.cookies?.access_token === 'string'
-            ? req.cookies.access_token
+          typeof req?.cookies?.[ACCESS_TOKEN_COOKIE] === 'string'
+            ? req.cookies[ACCESS_TOKEN_COOKIE]
             : null,
       ]),
       ignoreExpiration: false,
